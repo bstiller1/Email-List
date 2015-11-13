@@ -10,23 +10,32 @@
 
 <body style="margin:15px;">
 <fieldset style="width:400px;"><legend>Email List</legend>
-<form method="post">
+<form method="post" ng-app="myApp" ng-controller="validateCtrl" 
+name="myForm" novalidate>
+
 <table width="400">
   <tbody>
     <tr>
       <td><label for="fname">First Name: </label></td>
-      <td><input type="text" name="fname" /></td>
-      <td>&nbsp;</td>
+      <td><input type="text" name="fname" ng-model="fname" required /></td>
+      <td><span style="color:red" ng-show="myForm.fname.$dirty && myForm.fname.$invalid">
+<span ng-show="myForm.fname.$error.required">Username is required.</span>
+</span></td>
     </tr>
     <tr>
       <td><label for="lname">Last Name: </label></td>
-      <td><input type="text" name="lname" /></td>
-      <td>&nbsp;</td>
+      <td><input type="text" name="lname" ng-model="lname" required /></td>
+      <td><span style="color:red" ng-show="myForm.lname.$dirty && myForm.lname.$invalid">
+<span ng-show="myForm.lname.$error.required">Username is required.</span>
+</span></td>
     </tr>
     <tr>
       <td><label for="email">Email: </label></td>
-      <td><input type="email" name="email" /></td>
-      <td>&nbsp;</td>
+      <td><input type="email" name="email" ng-model="email" required /></td>
+      <td><span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+<span ng-show="myForm.email.$error.required">Email is required.</span>
+<span ng-show="myForm.email.$error.email">Invalid email address.</span>
+</span></td>
     </tr>
     <tr>
       <td>&nbsp;</td>
@@ -37,5 +46,13 @@
 </table>
 </form>
 </fieldset>
+<script>
+var app = angular.module('myApp', []);
+app.controller('validateCtrl', function($scope) {
+    $scope.fname = 'John';
+	$scope.lname = 'Doe';
+    $scope.email = 'john.doe@gmail.com';
+});
+</script>
 </body>
 </html>
