@@ -6,13 +6,35 @@
 <link rel="stylesheet" type="text/css" href="bootstrap.css">
 <link rel="stylesheet" type="text/css" href="bootstrap-theme.css">
 <script src="angular.js"></script>
+<script>
+var app = angular.module('myApp', []);
+app.controller('validateCtrl', function($scope, $http) {
+	/* $scope.master = {fname:"John", lname:"Doe", email:"john.doe@gmail.com"}; */
+   $scope.fname = 'John';
+	$scope.lname = 'Doe';
+    $scope.email = 'john.doe@gmail.com';
+
+	$scope.submit = function() {
+          	$http({
+	method: 'POST',
+	url: "http://blakestiller.com/formdata.php",
+	params: { fname: $scope.fname, lname: $scope.lname, Email: $scope.email }
+}).success(function(data) {
+	$scope.master = data;
+    document.getElementById("content").innerHTML = data;
+
+});
+
+      };
+});
+
+</script>
 </head>
 
 <body style="margin:15px;">
 <noscript style="width:100%; background-color:red; color:white;">You must have JavaScript enabled to continue.</noscript>
 <fieldset style="width:400px;"><legend>Email List</legend>
-<form method="post" ng-app="myApp" ng-controller="validateCtrl" 
-name="myForm" novalidate>
+<form method="post" ng-app="myApp" ng-controller="validateCtrl" ng-submit="submit()" name="myForm" novalidate>
 
 <table width="400">
   <tbody>
@@ -45,15 +67,12 @@ name="myForm" novalidate>
     </tr>
   </tbody>
 </table>
+First Name: {{ fname }}
+Last Name: {{ lname }}
+Email: {{ email}}
 </form>
 </fieldset>
-<script>
-var app = angular.module('myApp', []);
-app.controller('validateCtrl', function($scope) {
-    $scope.fname = 'John';
-	$scope.lname = 'Doe';
-    $scope.email = 'john.doe@gmail.com';
-});
-</script>
+<div id="content"></div>
+
 </body>
 </html>
