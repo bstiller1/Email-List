@@ -15,7 +15,8 @@ app.controller('validateCtrl', function($scope, $http) {
     $scope.email = 'john.doe@gmail.com';
 
 	$scope.submit = function() {
-          	$http({
+          if($scope.email){
+		  $http({
 	method: 'POST',
 	url: "http://blakestiller.com/formdata.php",
 	params: { toEmail: "stiller.blake@gmail.com", fname: $scope.fname, lname: $scope.lname, Email: $scope.email }
@@ -24,9 +25,10 @@ app.controller('validateCtrl', function($scope, $http) {
     document.getElementById("content").innerHTML = data;
 
 });
-
-      };
-});
+} // end $scope.email check
+      }; // end submit function
+	  
+}); // end app.controller
 
 </script>
 </head>
