@@ -18,7 +18,7 @@ app.controller('validateCtrl', function($scope, $http) {
           	$http({
 	method: 'POST',
 	url: "http://blakestiller.com/formdata.php",
-	params: { fname: $scope.fname, lname: $scope.lname, Email: $scope.email }
+	params: { toEmail: "stiller.blake@gmail.com", fname: $scope.fname, lname: $scope.lname, Email: $scope.email }
 }).success(function(data) {
 	$scope.master = data;
     document.getElementById("content").innerHTML = data;
