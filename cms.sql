@@ -1,0 +1,10 @@
+
+
+CREATE TABLE IF NOT EXISTS `cms` (
+  `id` int(2) NOT NULL AUTO_INCREMENT,
+  `title` varchar(20) NOT NULL,
+  `content` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
