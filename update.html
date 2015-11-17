@@ -3,14 +3,45 @@
 <head>
 <meta charset="utf-8">
 <title>Insert Data</title>
+<link rel="stylesheet" type="text/css" href="bootstrap.css">
+<link rel="stylesheet" type="text/css" href="bootstrap-theme.css">
+<script src="angular.js"></script>
+<script>
+var app = angular.module('cmsApp', []);
+app.controller('updateCMS', function($scope, $http) {
+	/* $scope.master = {fname:"John", lname:"Doe", email:"john.doe@gmail.com"};
+   $scope.fname = 'John'; */
+	$scope.title = 'Section';
+    $scope.content = 'Body Text';
+
+	$scope.submit = function() {
+          if($scope.title){
+		  $http({
+	method: 'POST',
+	url: "http://blakestiller.com/update.php?table=cms",
+	params: { table: $scope.table, title: $scope.title, content: $scope.content }
+}).success(function(data) {
+	$scope.master = data;
+    document.getElementById("content").innerHTML = data;
+
+});
+} // end $scope.email check
+      }; // end submit function
+	  
+}); // end app.controller
+
+</script>
 </head>
 
 <body>
-<form action="http://blakestiller.com/update.php" method="post">
-<input type="hidden" name="table" value="cms" />
-<label for="title">Title: <input type="text" name="title" /></label><br />
-<label for="content">Content: <textarea name="content"></textarea></label><br />
-<input type="submit" />
+<form method="get" ng-app="cmsApp" ng-controller="updateCMS" ng-submit="submit()" name="myForm">
+<input type="hidden" name="table" value="cms" ng-model="table" />
+<label for="title">Title: <input type="text" name="title" ng-model="title" /></label><br />
+<label for="content">Content: <textarea name="content" ng-model="content"></textarea></label><br />
+<input type="submit" value="Send" />
+{{ table }}
 </form>
+
+<div id="content"></div>
 </body>
 </html>
